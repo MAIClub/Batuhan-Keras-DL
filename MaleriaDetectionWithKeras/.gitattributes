@@ -1,0 +1,6 @@
+75by75Dataset.npy filter=lfs diff=lfs merge=lfs -text
+75by75Labels.npy filter=lfs diff=lfs merge=lfs -text
+Dataset.npy filter=lfs diff=lfs merge=lfs -text
+Labels.npy filter=lfs diff=lfs merge=lfs -text
+50by50Dataset.npy filter=lfs diff=lfs merge=lfs -text
+50by50Labels.npy filter=lfs diff=lfs merge=lfs -text
