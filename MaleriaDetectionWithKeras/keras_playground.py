@@ -24,7 +24,7 @@ for imageOne in infected:
     try:
         img = cv2.imread("cell_images/Parasitized/"+imageOne)
         img_from_array = Image.fromarray(img, "RGB")
-        size_image = img_from_array.resize((75,75))
+        size_image = img_from_array.resize((50,50))
         data.append(np.array(size_image))
         labels.append(0)
     except AttributeError:
@@ -34,7 +34,7 @@ for imageTwo in uninfected:
     try:
         img = cv2.imread("cell_images/Uninfected/"+imageTwo)
         img_from_array = Image.fromarray(img, "RGB")
-        size_image = img_from_array.resize((75,75))
+        size_image = img_from_array.resize((50,50))
         data.append(np.array(size_image))
         labels.append(1)
     except AttributeError:
@@ -43,11 +43,11 @@ for imageTwo in uninfected:
 Dataset = np.array(data)
 Labels = np.array(labels)
 
-np.save("75by75Dataset",Dataset)
-np.save("75by75Labels",Labels)
+np.save("50by50Dataset",Dataset)
+np.save("50by50Labels",Labels)
 #%% Loading Dataset and preparing for cnn
-loaded_dataset = np.load("75by75Dataset.npy")
-loaded_labels = np.load("75by75Labels.npy")
+loaded_dataset = np.load("50by50Dataset.npy")
+loaded_labels = np.load("50by50Labels.npy")
 
 s=np.arange(loaded_dataset.shape[0])
 np.random.shuffle(s)
@@ -69,7 +69,7 @@ y_train=keras.utils.to_categorical(y_train,num_classes)
 y_test=keras.utils.to_categorical(y_test,num_classes)
 #%% Create cnn
 model=Sequential()
-model.add(Conv2D(filters=16,kernel_size=2,padding="same",activation="relu",input_shape=(75,75,3)))
+model.add(Conv2D(filters=16,kernel_size=2,padding="same",activation="relu",input_shape=(50,50,3)))
 model.add(MaxPooling2D(pool_size=2))
 model.add(Conv2D(filters=32,kernel_size=2,padding="same",activation="relu"))
 model.add(MaxPooling2D(pool_size=2))
@@ -108,11 +108,10 @@ def get_cell_name(label):
     if label==1:
         return "Uninfected"
 def predict_image(file):
-    model = load_model('weights.h5')
+    model = load_model('weights_for_50px.h5')
     print("Predicting Image.................................")
     ar=convert_to_array(file)
     ar=ar/255
-    label=1
     a=[]
     a.append(ar)
     a=np.array(a)
@@ -122,7 +121,7 @@ def predict_image(file):
     print(label_index)
     acc=np.max(score)
     Cell=get_cell_name(label_index)
-    return Cell,"The predicted Image is a "+Cell+" with accuracy =    "+str(acc)
+    return "The predicted Image is a "+Cell+" with accuracy =  "+str(acc)
 
 
 
