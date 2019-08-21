@@ -1,2 +1,0 @@
- Test_Accuracy:- 0.9604355716878403 for 50by50px
- Test_Accuracy:- 0.9528130671506352 for 75by75px
