@@ -94,14 +94,13 @@ print('\n', 'Test_Accuracy:-', accuracy[1])
 
 
 from keras.models import load_model
-model.save('weights_for_75px.h5')
+model.save('weights_for_50px.h5')
 
 #%% prediction func
 def convert_to_array(img):
     im = cv2.imread(img)
-    img_ = Image.fromarray(im, 'RGB')
-    image = img_.resize((50, 50))
-    return np.array(image)
+    im = cv2.resize(im, (50, 50))
+    return np.array(im)
 def get_cell_name(label):
     if label==0:
         return "Paracitized"

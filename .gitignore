@@ -2,3 +2,5 @@
 MaleriaDetectionWithKeras/75by75Dataset.npy
 .DS_Store
 MaleriaDetectionWithKeras/50by50Dataset.npy
+*.h5
+*.npy
